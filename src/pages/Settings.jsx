@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
+import { AI_INTRO } from '../constants.js';
 import { useVoice } from '../contexts/VoiceContext.jsx';
 
 const Settings = () => {
@@ -53,8 +54,11 @@ const Settings = () => {
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="text-xl font-bold text-gray-800">
-              Gossips AI
+            <Link to="/" className="flex items-center text-xl font-bold text-gray-800">
+              <div className="w-8 h-8 bg-gradient-to-r from-sky-600 to-violet-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">AI</span>
+              </div>
+              <span className="ml-2">English Tutor</span>
             </Link>
             <div className="flex space-x-4">
               <Link to="/" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">

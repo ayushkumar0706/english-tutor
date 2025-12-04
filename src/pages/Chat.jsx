@@ -4,6 +4,7 @@ import { useChat } from '../contexts/ChatContext.jsx';
 import { useVoice } from '../contexts/VoiceContext.jsx';
 import { useAvatar } from '../contexts/AvatarContext.jsx';
 import Avatar from '../components/Avatar.jsx';
+import { AI_INTRO } from '../constants.js';
 import ChatWindow from '../components/ChatWindow.jsx';
 import ChatInput from '../components/ChatInput.jsx';
 import Footer from '../components/Footer.jsx';
@@ -133,7 +134,12 @@ const Chat = () => {
                 )}
                 <div>
                   <span className="text-sm font-semibold text-slate-800">{activeAvatar.name}</span>
-                  <p className="text-xs text-sky-600">{activeAvatar.role}</p>
+                  <p className="text-xs text-sky-600">
+                    {activeAvatar.role === 'Tutor' ? (
+                      <img src={AI_INTRO.Tutor.avatar} alt="Tutor" className="inline-block w-5 h-5 rounded-full object-cover mr-2" />
+                    ) : null}
+                    {activeAvatar.role}
+                  </p>
                 </div>
               </div>
             )}
@@ -163,7 +169,7 @@ const Chat = () => {
           activeAvatar={activeAvatar}
         />
         
-        <ChatWindow messages={messages} isLoading={isLoading} />
+        <ChatWindow messages={messages} isLoading={isLoading} activeAvatar={activeAvatar} />
         
         <ChatInput
           input={input}

@@ -2,6 +2,7 @@
 import { Link } from 'react-router';
 import { storageService } from '../utils/storageService.js';
 import { useAvatar } from '../contexts/AvatarContext.jsx';
+import { AI_INTRO } from '../constants.js';
 
 const Landing = () => {
   const { getActiveAvatar } = useAvatar();
@@ -25,7 +26,7 @@ const Landing = () => {
                 <div className="w-8 h-8 bg-gradient-to-r from-sky-600 to-violet-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">AI</span>
                 </div>
-                <h1 className="text-xl font-bold text-slate-800">Gossips</h1>
+                <h1 className="text-xl font-bold text-slate-800">English Tutor</h1>
               </div>
             </div>
             <div className="flex space-x-4">
@@ -100,7 +101,12 @@ const Landing = () => {
                   )}
                   <div className="text-left">
                     <h3 className="text-xl font-semibold text-slate-800">{activeAvatar.name}</h3>
-                    <p className="text-sky-600 font-medium">{activeAvatar.role}</p>
+                    <p className="text-sky-600 font-medium">
+                      {activeAvatar.role === 'Tutor' ? (
+                        <img src={AI_INTRO.Tutor.avatar} alt="Tutor" className="inline-block w-5 h-5 rounded-full object-cover mr-2" />
+                      ) : null}
+                      {activeAvatar.role}
+                    </p>
                   </div>
                 </div>
                 <p className="text-slate-500">Your current conversation partner</p>
@@ -348,7 +354,7 @@ const Landing = () => {
                 <div className="w-8 h-8 bg-gradient-to-r from-sky-600 to-violet-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">AI</span>
                 </div>
-                <h3 className="text-xl font-bold">Gossips AI</h3>
+                <h3 className="text-xl font-bold">English Tutor AI</h3>
               </div>
               <p className="text-slate-400 mb-6 max-w-md">
                 Empowering everyone to communicate confidently in English through AI-powered personalized tutoring.
@@ -373,7 +379,7 @@ const Landing = () => {
           </div>
           
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
-            <p>&copy; 2025 Gossips AI. Made with ❤️ for language learners by @Ayush.</p>
+            <p>&copy; 2025 English Tutor. Made with ❤️ for language learners by @Ayush.</p>
           </div>
         </div>
       </footer>

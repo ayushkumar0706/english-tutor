@@ -8,7 +8,7 @@ export const AI_NAME = 'Eliza';
 export const ROLES = ['Tutor', 'Brother', 'Sister', 'Mother', 'Custom'];
 
 export const AI_INTRO = {
-    Tutor: { name: "Eliza", avatar: "https://avatars.dicebear.com/api/avataaars/eliza-tutor.svg?background=%23f8fafc" },
+    Tutor: { name: "Eliza", avatar: "https://img.freepik.com/premium-vector/professional-teacher-avatar-illustration-education-concept_1107453-362.jpg" },
     Brother: { name: "Amit", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_1DKypQKCkiqlUEOwC4WCpO6TO5ZejbxjXw&s" },
     Sister: { name: "Priya", avatar: "https://thumbs.dreamstime.com/b/ai-generated-illustration-cute-cartoonish-girl-dress-white-background-ai-generated-illustration-cute-317062540.jpg" },
     Mother: { name: "Sunita", avatar: "https://static.vecteezy.com/system/resources/previews/032/065/728/non_2x/mother-day-mother-with-son-ai-generative-free-png.png" },

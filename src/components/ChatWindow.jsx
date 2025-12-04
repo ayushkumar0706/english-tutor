@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ChatMessage from './ChatMessage.jsx';
 
-const ChatWindow = ({ messages, isLoading }) => {
+const ChatWindow = ({ messages, isLoading, activeAvatar }) => {
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const ChatWindow = ({ messages, isLoading }) => {
       )}
       
       {messages.map((msg) => (
-        <ChatMessage key={msg.id} message={msg} />
+        <ChatMessage key={msg.id} message={msg} activeAvatar={activeAvatar} />
       ))}
       
       {isLoading && messages[messages.length - 1]?.role === 'user' && (

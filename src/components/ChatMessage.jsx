@@ -1,10 +1,10 @@
 import React from 'react';
-import { MessageRole } from '../constants.js';
+import { MessageRole, AI_INTRO } from '../constants.js';
 import BotIcon from './icons/BotIcon.jsx';
 import UserIcon from './icons/UserIcon.jsx';
 
 
-const ChatMessage = ({ message }) => {
+const ChatMessage = ({ message, activeAvatar }) => {
   const isUser = message.role === MessageRole.USER;
 
   const renderIcon = () => {
@@ -12,6 +12,20 @@ const ChatMessage = ({ message }) => {
     if (isUser) {
         return <UserIcon className={`${iconClass} bg-blue-500 text-white`} />;
     }
+
+    // For model messages, prefer the active avatar image when available
+    if (activeAvatar) {
+      const src = activeAvatar.imageUrl || activeAvatar.avatar || null;
+      if (src) {
+        return <img src={src} alt={activeAvatar.name || 'AI'} className="w-8 h-8 rounded-full object-cover" />;
+      }
+
+      // If the active avatar has role 'Tutor' (Eliza) but no custom image, use the canonical Eliza avatar
+      if (activeAvatar.role === 'Tutor') {
+        return <img src={AI_INTRO.Tutor.avatar} alt={AI_INTRO.Tutor.name || 'Eliza'} className="w-8 h-8 rounded-full object-cover" />;
+      }
+    }
+
     return <BotIcon className={`${iconClass} bg-purple-500 text-white`} />;
   };
 

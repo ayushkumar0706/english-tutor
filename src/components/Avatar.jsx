@@ -57,8 +57,15 @@ const Avatar = ({
                     </button>
                 </div>
             </div>
-            <h2 className="text-xl font-bold mt-3 text-gray-800">{selectedRole}</h2>
-            <p className="text-sm text-gray-500">Your Personal English Practice Partner</p>
+            <h2 className="text-xl font-bold mt-3 text-gray-800">{avatarName}</h2>
+            <div className="flex items-center mt-1 space-x-2">
+                {selectedRole === 'Tutor' ? (
+                    <img src={AI_INTRO.Tutor.avatar} alt="Tutor avatar" className="w-6 h-6 rounded-full object-cover" />
+                ) : (
+                    <div className="px-2 py-1 text-xs bg-gray-100 rounded-md text-gray-600">{selectedRole}</div>
+                )}
+                <p className="text-sm text-gray-500">Your Personal English Practice Partner</p>
+            </div>
         </div>
     );
 };
