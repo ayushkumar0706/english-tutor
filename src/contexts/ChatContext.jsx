@@ -28,7 +28,7 @@ export const ChatProvider = ({ children }) => {
   const [activeSessionId, setActiveSessionId] = useState(null);
   
   const recognitionRef = useRef(null);
-  const { speak } = useVoice();
+  const { speak, selectedVoiceURI, rate: voiceRatePref, pitch: voicePitchPref, lang: voiceLangPref } = useVoice();
   const { getActiveAvatar, getSystemInstructionForAvatar } = useAvatar();
 
   // Setup speech recognition
@@ -108,10 +108,15 @@ export const ChatProvider = ({ children }) => {
       
       setMessages(prevMessages => [...prevMessages, modelMessage]);
       
-      // Speak the response with avatar voice settings if available
+      // Speak the response with avatar voice settings if available.
+      // If the active avatar has explicit voice settings, use them. Otherwise,
+      // if the avatar is the Tutor, prefer the user's selected voice settings
+      // to keep the voice consistent across replies.
       const activeAvatar = getActiveAvatar();
       if (activeAvatar && activeAvatar.voice) {
         speak(aiResponse.response, activeAvatar.voice);
+      } else if (activeAvatar && activeAvatar.role === 'Tutor') {
+        speak(aiResponse.response, { voiceURI: selectedVoiceURI, rate: voiceRatePref, pitch: voicePitchPref, lang: voiceLangPref });
       } else {
         speak(aiResponse.response);
       }
@@ -160,9 +165,13 @@ export const ChatProvider = ({ children }) => {
       
       setMessages([modelMessage]);
       
-      // Speak with avatar voice if available
+      // Speak with avatar voice if available. Prefer avatar.voice; otherwise
+      // use the global selected voice settings for the Tutor role to keep
+      // replies consistent.
       if (activeAvatar && activeAvatar.voice) {
         speak(aiResponse.response, activeAvatar.voice);
+      } else if (activeAvatar && activeAvatar.role === 'Tutor') {
+        speak(aiResponse.response, { voiceURI: selectedVoiceURI, rate: voiceRatePref, pitch: voicePitchPref, lang: voiceLangPref });
       } else {
         speak(aiResponse.response);
       }

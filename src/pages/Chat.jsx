@@ -37,7 +37,8 @@ const Chat = () => {
     voices,
     selectedVoiceURI,
     toggleTts,
-    updateVoiceSettings
+    updateVoiceSettings,
+    cancel
   } = useVoice();
 
   const {
@@ -101,8 +102,17 @@ const Chat = () => {
   };
 
   const handleGoHome = () => {
+    // Stop any ongoing TTS before navigating away
+    if (cancel) cancel();
     navigate('/');
   };
+
+  // Ensure speech is stopped when the Chat component unmounts or route changes
+  useEffect(() => {
+    return () => {
+      if (cancel) cancel();
+    };
+  }, [cancel]);
 
   const activeAvatar = getActiveAvatar();
 
